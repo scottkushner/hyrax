@@ -1,0 +1,20 @@
+en:
+  hyrax:
+    embargoes:
+      manage: Manage Embargoes
+      index:
+        active: All Active Embargoes
+        expired: Expired Active Embargoes
+        deactivated: Deactivated Embargoes
+      edit:
+        header:
+          current: Current Embargo
+          past: Past Embargoes
+        embargo_true: This work is under embargo
+        embargo_false: This work is not currently under embargo.  If you would like to apply an embargo, provide the information here.
+        embargo_update: Update Embargo
+        embargo_deactivate: Deactivate Embargo
+        embargo_apply: Apply Embargo
+        embargo_cancel: Cancel and manage all embargoes
+        embargo_return: "Return to editing this %{cc.human_readable_type}"
+        history_empty: "This %{cc.human_readable_type} has never had embargoes applied to it."
