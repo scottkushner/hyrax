@@ -23,8 +23,6 @@ module Hyrax
 
       # Process changes from profile form
       def update
-        conditionally_set_user_attributes
-
         if @user.save
           handle_successful_update
           redirect_to hyrax.dashboard_profile_path(@user.to_param), notice: "Your profile has been updated"
@@ -34,15 +32,6 @@ module Hyrax
       end
 
       private
-
-        def conditionally_set_user_attributes
-          return true unless params[:user]
-          @user.attributes = user_params
-          case params[:user][:update_directory]
-          when '1', 'true', true
-            @user.populate_attributes
-          end
-        end
 
         def handle_successful_update
           # TODO: this should be moved to TrophiesController
