@@ -338,4 +338,13 @@ RSpec.describe Hyrax::CollectionsController do
       end
     end
   end
+
+  describe "#files" do
+    before { sign_in user }
+
+    it 'shows a list of member files' do
+      get :files, params: { id: collection }, format: :json
+      expect(response).to be_success
+    end
+  end
 end

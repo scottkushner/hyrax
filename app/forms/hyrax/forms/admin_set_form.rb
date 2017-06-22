@@ -42,6 +42,14 @@ module Hyrax
           end
         end
       end
+
+      private
+
+        def member_presenters
+          PresenterFactory.build_for(ids: model.member_ids,
+                                     presenter_class: WorkShowPresenter,
+                                     presenter_args: [nil])
+        end
     end
   end
 end

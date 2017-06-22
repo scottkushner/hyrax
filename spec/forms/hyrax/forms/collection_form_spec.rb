@@ -117,22 +117,20 @@ RSpec.describe Hyrax::Forms::CollectionForm do
   end
 
   describe '#select_files' do
+    subject { form.select_files }
+
     context 'without any works/files attached' do
-      subject { form.select_files }
       it { is_expected.to be_empty }
     end
 
     context 'with a work/file attached' do
-      let(:work) { create(:work_with_one_file) }
+      let!(:work) { create(:work_with_one_file, member_of_collections: [collection]) }
       let(:title) { work.file_sets.first.title.first }
       let(:file_id) { work.file_sets.first.id }
-      let(:collection_with_file) do
-        create(:collection, members: [work])
-      end
+      let(:collection) { create(:collection) }
 
       it 'returns a hash of with file title as key and file id as value' do
-        form_with_files = described_class.new(collection_with_file)
-        expect(form_with_files.select_files).to eq(title => file_id)
+        expect(subject).to eq(title => file_id)
       end
     end
   end

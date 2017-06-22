@@ -45,7 +45,7 @@ module Hyrax
     end
 
     # Renders a JSON response with a list of files in this admin set.
-    # This is used by the edit form
+    # This is used by the edit form to populate the thumbnail_id dropdown
     def files
       form = form_class.new(@admin_set)
       result = form.select_files.map do |label, id|

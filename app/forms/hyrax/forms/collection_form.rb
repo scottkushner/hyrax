@@ -22,10 +22,12 @@ module Hyrax
         Hash[all_files]
       end
 
+      # Terms that appear above the accordion
       def primary_terms
         [:title]
       end
 
+      # Terms that appear within the accordion
       def secondary_terms
         [:creator,
          :contributor,
@@ -48,6 +50,11 @@ module Hyrax
         secondary_terms.any?
       end
 
+      def thumbnail_title
+        return unless model.thumbnail
+        model.thumbnail.title.first
+      end
+
       private
 
         def all_files
@@ -55,7 +62,7 @@ module Hyrax
         end
 
         def member_presenters
-          PresenterFactory.build_for(ids: model.member_ids,
+          PresenterFactory.build_for(ids: model.member_object_ids,
                                      presenter_class: WorkShowPresenter,
                                      presenter_args: [nil])
         end
