@@ -379,12 +379,28 @@ module Hyrax
       @extract_full_text = true
     end
 
+    attr_writer :uploader
+    def uploader
+      return default_uploader_config unless Rails.env.development?
+      # use sequential uploads in development to avoid database locking problems with sqlite3.
+      default_uploader_config.merge!(limitConcurrentUploads: 1, sequentialUploads: true)
+    end
+
     private
 
       # @param [Symbol, #to_s] model_name - symbol representing the model
       # @return [String] the class name for the model
       def normalize_concern_name(model_name)
         model_name.to_s.camelize
+      end
+
+      # @return [Hash] config options for the uploader
+      def default_uploader_config
+        {
+          limitConcurrentUploads: 6,
+          maxNumberOfFiles: 100,
+          maxFileSize: 500.megabytes
+        }
       end
   end
 end
